@@ -1,0 +1,5 @@
+#!/bin/bash
+
+IMAGE_NAME=dev-pdw
+CONTAINER_NAME=dev-pdw
+CONTAINER_IP_ADDRESS=172.18.0.30
