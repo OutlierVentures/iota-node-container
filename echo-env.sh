@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo My environment:
+echo IOTA_APP_ROOT_URL=$IOTA_APP_ROOT_URL
+echo IOTA_COMPOSE_ENV=$IOTA_COMPOSE_ENV
+echo IOTA_APP_PORT=$IOTA_APP_PORT
+

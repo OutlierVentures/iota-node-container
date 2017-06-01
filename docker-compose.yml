@@ -1,0 +1,37 @@
+version: '2'
+services:
+  iota_node:
+    build: ./node
+    container_name: iota_node_${IOTA_COMPOSE_ENV}
+    image: iota_node:${IOTA_COMPOSE_ENV}
+    networks:
+      develop:
+        ipv4_address: 172.18.0.60
+    expose:
+      - "14265"
+    volumes:
+      - ./data/iri:/data/iri
+  app:
+    build: ./app
+    container_name: iota_app_${IOTA_COMPOSE_ENV}
+    image: iota_app:${IOTA_COMPOSE_ENV}
+    volumes:
+      - ./data:/data
+    networks:
+      develop:
+        ipv4_address: 172.18.0.61
+# The web port is opened on local host only. Made available externally through nginx proxy.
+# Make sure that the container port number matches the Meteor port number in PORT below.
+    ports:
+      - "127.0.0.1:${IOTA_APP_PORT}:4000"
+# The app container has access to both database containers on the (internally) exposed ports.
+    links:
+      - iota_node
+    environment:
+      - IOTA_NODE_URL=udp://iota_node:14265
+      - ROOT_URL=${IOTA_APP_ROOT_URL}
+      - IOTA_COMPOSE_ENV=${IOTA_COMPOSE_ENV}
+      - PORT=4000
+networks:
+  develop:
+    external: true
