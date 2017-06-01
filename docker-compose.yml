@@ -11,12 +11,13 @@ services:
       - "14265"
     volumes:
       - ./data/iri:/data/iri
+      - ./data/ixi:/data/ixi
   app:
     build: ./app
     container_name: iota_app_${IOTA_COMPOSE_ENV}
     image: iota_app:${IOTA_COMPOSE_ENV}
     volumes:
-      - ./data:/data
+      - ./data:/data      
     networks:
       develop:
         ipv4_address: 172.18.0.61
