@@ -8,6 +8,7 @@ start:
 stop:
 	@echo "\nStopping docker containers..."
 	docker-compose -p iota-app-${IOTA_COMPOSE_ENV} down
+	docker-compose -p iota-node-${IOTA_COMPOSE_ENV} down
 	docker ps
 
 build-app: 

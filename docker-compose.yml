@@ -9,6 +9,8 @@ services:
         ipv4_address: 172.18.0.60
     expose:
       - "14265"
+    ports:
+      - "14265:14265/udp"
     volumes:
       - ./data/iri:/data/iri
       - ./data/ixi:/data/ixi
