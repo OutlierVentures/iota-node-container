@@ -24,9 +24,9 @@ rebuild-app:
 
 build-node:
 	@echo "\nBuilding Iota node container..."
-	docker-compose -p iota-node-${IOTA_COMPOSE_ENV} stop node
-	docker-compose -p iota-node-${IOTA_COMPOSE_ENV} build node
-	docker-compose -p iota-node-${IOTA_COMPOSE_ENV} up -d node
+	docker-compose -p iota-node-${IOTA_COMPOSE_ENV} stop iota_node
+	docker-compose -p iota-node-${IOTA_COMPOSE_ENV} build iota_node
+	docker-compose -p iota-node-${IOTA_COMPOSE_ENV} up -d iota_node
 
 help:
 	@echo "\n----------"
