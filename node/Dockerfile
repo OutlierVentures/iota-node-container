@@ -24,7 +24,7 @@ RUN echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true
 RUN apt-get update -y && apt-get install -y oracle-java8-installer
 
 # Install iri
-ENV IRI_VERSION 1.1.4.1
+ENV IRI_VERSION 1.1.4.2
 ENV IRI_JAR_NAME iri-${IRI_VERSION}.jar
 
 # Use "sh", "-c", "... $VAR" to effect variable substitution
