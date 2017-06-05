@@ -45,8 +45,10 @@ COPY config/iri.ini /iri/
 
 # Start iri with the right data dir
 #  -Djava.net.preferIPv4Stack=true to prevent only binding to ipv6 localhost
+# Remote authentication, sets HTTP auth which is currently not supported by wallets.
+# --remote-auth ovuser:abcde
 CMD ["sh", "-c", "service rinetd start && java -Djava.net.preferIPv4Stack=true -jar /iri/${IRI_JAR_NAME} -c /iri/iri.ini --remote"]
-# --remote-auth iotatoken:...
+
 
 #CMD service rinetd start && tail -f /var/log/dmesg
 

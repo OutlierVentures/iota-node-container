@@ -11,6 +11,7 @@ services:
       - "14265"
     ports:
       - "14265:14265/udp"
+      - "12123:12123/tcp"
     volumes:
       - ./data/iri:/data/iri
       - ./data/ixi:/data/ixi
