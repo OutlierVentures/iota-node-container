@@ -24,8 +24,11 @@ RUN echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true
 RUN apt-get update -y && apt-get install -y oracle-java8-installer
 
 # Install iri
-ENV IRI_VERSION 1.1.4.3
+ENV IRI_VERSION 1.2.0
 ENV IRI_JAR_NAME iri-${IRI_VERSION}.jar
+
+# "v" added since 1.2.0
+ENV GITHUB_DOWNLOAD_PATH https://github.com/iotaledger/iri/releases/download/v
 
 # Use "sh", "-c", "... $VAR" to effect variable substitution
 # https://docs.docker.com/engine/reference/builder/#run
@@ -35,9 +38,18 @@ RUN ["sh", "-c", "echo $IRI_VERSION"]
 RUN ["sh", "-c", "echo $IRI_JAR_NAME"]
 
 RUN ["sh", "-c", "mkdir /iri"]
-RUN ["sh", "-c", "echo curl -L -o /iri/${IRI_JAR_NAME} https://github.com/iotaledger/iri/releases/download/${IRI_VERSION}/${IRI_JAR_NAME}" ]
+RUN ["sh", "-c", "echo curl -L -o /iri/${IRI_JAR_NAME} ${GITHUB_DOWNLOAD_PATH}${IRI_VERSION}/${IRI_JAR_NAME}" ]
 
-RUN ["sh", "-c", "curl -L -o /iri/${IRI_JAR_NAME} https://github.com/iotaledger/iri/releases/download/${IRI_VERSION}/${IRI_JAR_NAME}" ]
+RUN ["sh", "-c", "curl -L -o /iri/${IRI_JAR_NAME} ${GITHUB_DOWNLOAD_PATH}${IRI_VERSION}/${IRI_JAR_NAME}" ]
+
+
+# Verify release
+RUN ["sh", "-c", "curl -L -o /iri/${IRI_JAR_NAME}.asc ${GITHUB_DOWNLOAD_PATH}${IRI_VERSION}/${IRI_JAR_NAME}.asc" ]
+
+RUN ["sh", "-c", "curl https://keybase.io/paulhandy/pgp_keys.asc | gpg --import" ]
+
+RUN ["sh", "-c", "gpg --verify /iri/${IRI_JAR_NAME}.asc /iri/${IRI_JAR_NAME}"]
+
 
 COPY config/iri.ini /iri/
 
