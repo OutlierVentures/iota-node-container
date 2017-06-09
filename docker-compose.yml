@@ -5,16 +5,20 @@ services:
     container_name: iota_node_${IOTA_COMPOSE_ENV}
     image: iota_node:${IOTA_COMPOSE_ENV}
     networks:
+    # TODO: make network name configurable.
       develop:
-        ipv4_address: 172.18.0.60
+        ipv4_address: ${IOTA_NODE_IP}
     expose:
-      - "14265"
+      - "${IOTA_UDP_PORT}"
     ports:
-      - "14265:14265/udp"
-      - "12123:12123/tcp"
+      - "${IOTA_UDP_PORT}:${IOTA_UDP_PORT}/udp"
+      - "${IOTA_API_PORT}:${IOTA_API_PORT}/tcp"
     volumes:
       - ./data/iri:/data/iri
       - ./data/ixi:/data/ixi
+      - ./data/apps:/data/apps
+    environment:
+      - IRI_ADDITIONAL_OPTIONS=${IRI_ADDITIONAL_OPTIONS}
   app:
     build: ./app
     container_name: iota_app_${IOTA_COMPOSE_ENV}
