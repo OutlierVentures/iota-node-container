@@ -2,6 +2,6 @@
 
 source ./set-env.sh
 
-# make build-node
+make build-node
 make build-app
 
