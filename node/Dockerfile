@@ -24,7 +24,8 @@ RUN echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true
 RUN apt-get update -y && apt-get install -y oracle-java8-installer
 
 # Install iri
-ENV IRI_VERSION 1.2.0
+ENV IRI_VERSION 1.3.0
+ENV PATH_VERSION 1.3
 ENV IRI_JAR_NAME iri-${IRI_VERSION}.jar
 
 # "v" added since 1.2.0
@@ -38,15 +39,19 @@ RUN ["sh", "-c", "echo $IRI_VERSION"]
 RUN ["sh", "-c", "echo $IRI_JAR_NAME"]
 
 RUN ["sh", "-c", "mkdir /iri"]
-RUN ["sh", "-c", "echo curl -L -o /iri/${IRI_JAR_NAME} ${GITHUB_DOWNLOAD_PATH}${IRI_VERSION}/${IRI_JAR_NAME}" ]
+RUN ["sh", "-c", "echo curl -L -o /iri/${IRI_JAR_NAME} ${GITHUB_DOWNLOAD_PATH}${PATH_VERSION}/${IRI_JAR_NAME}" ]
 
-RUN ["sh", "-c", "curl -L -o /iri/${IRI_JAR_NAME} ${GITHUB_DOWNLOAD_PATH}${IRI_VERSION}/${IRI_JAR_NAME}" ]
+RUN ["sh", "-c", "curl -L -o /iri/${IRI_JAR_NAME} ${GITHUB_DOWNLOAD_PATH}${PATH_VERSION}/${IRI_JAR_NAME}" ]
 
 
 # Verify release
-RUN ["sh", "-c", "curl -L -o /iri/${IRI_JAR_NAME}.asc ${GITHUB_DOWNLOAD_PATH}${IRI_VERSION}/${IRI_JAR_NAME}.asc" ]
+RUN ["sh", "-c", "curl -L -o /iri/${IRI_JAR_NAME}.asc ${GITHUB_DOWNLOAD_PATH}${PATH_VERSION}/${IRI_JAR_NAME}.asc" ]
 
 RUN ["sh", "-c", "curl https://keybase.io/paulhandy/pgp_keys.asc | gpg --import" ]
+
+# Show contents of IRI folder for debugging
+RUN ["sh", "-c", "echo Contents of /iri:"]
+RUN ["sh", "-c", "ls -la /iri"]
 
 RUN ["sh", "-c", "gpg --verify /iri/${IRI_JAR_NAME}.asc /iri/${IRI_JAR_NAME}"]
 
