@@ -1,0 +1,10 @@
+[IRI]
+PORT = 14265
+UDP_RECEIVER_PORT = 14600
+#TCP_RECEIVER_PORT = 15600
+NEIGHBORS = udp://some.neighbor.com:14600 tcp://1.2.3.4:15100
+IXI_DIR = /data/ixi
+HEADLESS = true
+DEBUG = false
+TESTNET = false
+DB_PATH = /data/iri
