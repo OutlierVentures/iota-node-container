@@ -24,8 +24,8 @@ RUN echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true
 RUN apt-get update -y && apt-get install -y oracle-java8-installer
 
 # Install iri
-ENV IRI_VERSION 1.3.0
-ENV PATH_VERSION 1.3
+ENV IRI_VERSION 1.3.1
+ENV PATH_VERSION 1.3.1
 ENV IRI_JAR_NAME iri-${IRI_VERSION}.jar
 
 # "v" added since 1.2.0
