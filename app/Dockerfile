@@ -11,7 +11,7 @@ RUN apt-get update -y && apt-get install curl git python build-essential screen 
 	&& (curl https://install.meteor.com/ | sh)
 
 # Install node
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get update -y && apt-get install -y nodejs 
 
 # Create user but not the homedir. We'll mount it.

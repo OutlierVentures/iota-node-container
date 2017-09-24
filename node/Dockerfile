@@ -26,7 +26,7 @@ RUN apt-get update -y && apt-get install -y oracle-java8-installer
 # Install iri
 
 # IRI version as used in the file name
-ENV IRI_VERSION 1.3.2.2
+ENV IRI_VERSION 1.4.0
 
 # IRI version as used in the path on Github (sometimes less precise, e.g. "1.3" when the version is "1.3.0")
 #ENV PATH_VERSION 1.3
