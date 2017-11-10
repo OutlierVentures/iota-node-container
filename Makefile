@@ -25,6 +25,10 @@ build-node:
 	@echo "\nBuilding Iota node container..."
 	docker-compose -p iota-node-${IOTA_COMPOSE_ENV} build iota_node
 
+rebuild-node:
+	@echo "\nBuilding Iota node container..."
+	docker-compose -p iota-node-${IOTA_COMPOSE_ENV} build --no-cache iota_node
+
 help:
 	@echo "\n----------"
 	@echo "\nmake start - start the docker containers"
