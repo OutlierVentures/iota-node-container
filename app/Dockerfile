@@ -24,5 +24,5 @@ RUN locale-gen en_US.UTF-8
 RUN update-locale LANG=en_US.UTF-8
 
 # Start any other commands/services here. Last command needs to keep running.
-CMD service rinetd start && tail -f /var/log/dmesg
+CMD service rinetd start && /data/apps/start_app.sh && tail -f /var/log/dmesg
 
