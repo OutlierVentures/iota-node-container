@@ -26,7 +26,7 @@ RUN apt-get update -y && apt-get install -y oracle-java8-installer
 # Install iri
 
 # IRI version as used in the file name
-ENV IRI_VERSION 1.4.2.4
+ENV IRI_VERSION 1.5.3
 
 # IRI version as used in the path on Github (sometimes less precise, e.g. "1.3" when the version is "1.3.0")
 #ENV PATH_VERSION 1.3
@@ -59,7 +59,11 @@ RUN ["sh", "-c", "curl https://keybase.io/paulhandy/pgp_keys.asc | gpg --import"
 RUN ["sh", "-c", "echo Contents of /iri:"]
 RUN ["sh", "-c", "ls -la /iri"]
 
-RUN ["sh", "-c", "gpg --verify /iri/${IRI_JAR_NAME}.asc /iri/${IRI_JAR_NAME}"]
+# GPG check disabled. Mechanism has changed: sha256-sum of the files with a GPG sig is published in a file called 
+# SHA256SUM.asc. So check needs to become:
+# 1. check GPG sig of SHA256SUM.asc
+# 2. check whether sha256 ${IRI_JAR_NAME} equals the one in the file (grep {sha256 result} ${IRI_JAR_NAME} SHA256SUM.asc)
+# RUN ["sh", "-c", "gpg --verify /iri/${IRI_JAR_NAME}.asc /iri/${IRI_JAR_NAME}"]
 
 
 COPY config/iri.ini /iri/
